@@ -14,9 +14,9 @@ interface Props {
 }
 
 function MenuCom(props: Props) {
-  const [selectedKeys, setSelectedKeys] = useState("home");
+  const [selectedKeys, setSelectedKeys] = useState<string>("home");
 
-  const onClick = (e: any) => {
+  const onClick = (e: any): void => {
     setSelectedKeys(e.key);
   };
 
@@ -29,7 +29,7 @@ function MenuCom(props: Props) {
 
   return (
     <Menu
-      onClick={(e) => onClick(e)}
+      onClick={(e): void => onClick(e)}
       selectedKeys={[selectedKeys]}
       mode="inline"
     >

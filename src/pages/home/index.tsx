@@ -1,13 +1,15 @@
 import { useEffect } from "react";
-import { Table } from "antd";
+import { Table,Space } from "antd";
 
 import axios from "axios";
 import "../../mock/index";
 import { useState } from "react";
+import { dataColumnItemInFa, dataItemInFa } from "../../types/index";
 
 const HomeIndex = (props: Props) => {
-  const [dataSource, setDataSource] = useState([]);
-  const columns = [
+  const [dataSource, setDataSource] = useState<dataItemInFa[]>([]);
+
+  const columns: Array<dataColumnItemInFa> = [
     {
       title: "姓名",
       dataIndex: "name",
@@ -28,6 +30,16 @@ const HomeIndex = (props: Props) => {
       dataIndex: "job",
       key: "job",
     },
+    {
+      title: "操作",
+      dataIndex: "action",
+      key: "action",
+      render:(text:string, record:any) => (
+        <Space size="middle">
+          <a>Delete</a>
+        </Space>
+      ),
+    },
   ];
   useEffect(() => {
     axios
@@ -36,7 +48,7 @@ const HomeIndex = (props: Props) => {
         console.log(res.data.userinfo);
         setDataSource(res.data.userinfo);
       });
-  },[]);
+  }, []);
   return (
     <>
       <Table dataSource={dataSource} columns={columns} />;
